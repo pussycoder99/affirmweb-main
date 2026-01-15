@@ -27,6 +27,8 @@ class WhmcsClient {
             if (this.config && this.config.proxyUrl && this.config.proxyUrl.length > 0) {
                 // Ensure request goes to Custom Proxy
                 console.log(`[Proxy] Using Custom Proxy: ${this.config.proxyUrl}`);
+                console.log(`[Proxy] Params keys:`, Object.keys(params)); // Debugging log
+
                 const response = await fetch(this.config.proxyUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },

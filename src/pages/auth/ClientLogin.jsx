@@ -24,7 +24,7 @@ export default function ClientLogin() {
             setError(result.message || 'Login failed');
             setLoading(false);
         } else {
-            navigate('/'); // Redirect to home or client dashboard eventually
+            navigate('/dashboard');
         }
     };
 

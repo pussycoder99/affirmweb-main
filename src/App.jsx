@@ -9,6 +9,8 @@ import AdminRegister from './pages/admin/Register';
 import Settings from './pages/admin/Settings';
 import ClientLogin from './pages/auth/ClientLogin';
 import ClientSignup from './pages/auth/ClientSignup';
+import ClientLayout from './layouts/ClientLayout';
+import ClientDashboard from './pages/client/Dashboard';
 
 function App() {
   return (
@@ -20,6 +22,15 @@ function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<ClientLogin />} />
             <Route path="/signup" element={<ClientSignup />} />
+
+            {/* Client Area */}
+            <Route path="/dashboard" element={<ClientLayout />}>
+              <Route index element={<ClientDashboard />} />
+              <Route path="services" element={<div className="text-white">Services Page (Coming Soon)</div>} />
+              <Route path="billing" element={<div className="text-white">Billing Page (Coming Soon)</div>} />
+              <Route path="support" element={<div className="text-white">Support Page (Coming Soon)</div>} />
+              <Route path="profile" element={<div className="text-white">Profile Page (Coming Soon)</div>} />
+            </Route>
 
             {/* Admin Routes */}
             <Route path="/admin/login" element={<Login />} />

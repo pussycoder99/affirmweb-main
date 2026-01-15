@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '../ui/Button';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -48,12 +49,16 @@ export function Header() {
                 </nav>
 
                 <div className="hidden md:flex items-center gap-4">
-                    <Button variant="outline" size="sm" onClick={() => window.location.href = 'https://portal.affirmweb.com/login'}>
-                        Login
-                    </Button>
-                    <Button variant="primary" size="sm" onClick={() => window.location.href = 'https://portal.affirmweb.com/cart.php'}>
-                        Get Started
-                    </Button>
+                    <Link to="/login">
+                        <Button variant="outline" size="sm">
+                            Login
+                        </Button>
+                    </Link>
+                    <Link to="/signup">
+                        <Button variant="primary" size="sm">
+                            Get Started
+                        </Button>
+                    </Link>
                 </div>
 
                 {/* Mobile Menu Toggle */}
