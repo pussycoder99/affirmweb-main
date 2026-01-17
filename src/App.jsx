@@ -11,6 +11,8 @@ import ClientLogin from './pages/auth/ClientLogin';
 import ClientSignup from './pages/auth/ClientSignup';
 import ClientLayout from './layouts/ClientLayout';
 import ClientDashboard from './pages/client/Dashboard';
+import OrderN8n from './pages/OrderN8n';
+import Invoice from './pages/Invoice';
 
 function App() {
   return (
@@ -30,7 +32,11 @@ function App() {
               <Route path="billing" element={<div className="text-white">Billing Page (Coming Soon)</div>} />
               <Route path="support" element={<div className="text-white">Support Page (Coming Soon)</div>} />
               <Route path="profile" element={<div className="text-white">Profile Page (Coming Soon)</div>} />
+              <Route path="profile" element={<div className="text-white">Profile Page (Coming Soon)</div>} />
             </Route>
+
+            <Route path="/order/n8n-cloud" element={<OrderN8n />} />
+            <Route path="/invoice/:id" element={<Invoice />} />
 
             {/* Admin Routes */}
             <Route path="/admin/login" element={<Login />} />

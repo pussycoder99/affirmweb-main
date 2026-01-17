@@ -21,7 +21,12 @@ export default function ClientLogin() {
         const result = await login(email, password);
 
         if (!result.success) {
-            setError(result.message || 'Login failed');
+            if (result.message?.includes('not configured')) {
+                setError('The system is currently undergoing maintenance. Please try again later.');
+                console.error('[Auth] Login failed: WHMCS not configured');
+            } else {
+                setError(result.message || 'Login failed');
+            }
             setLoading(false);
         } else {
             navigate('/dashboard');
