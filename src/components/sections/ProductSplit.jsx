@@ -3,8 +3,10 @@ import { Button } from '../ui/Button';
 import { Check, ArrowRight } from 'lucide-react';
 import { Section } from '../ui/Section';
 import { Badge } from '../ui/Badge';
+import { useNavigate } from 'react-router-dom';
 
 export function ProductSplit() {
+    const navigate = useNavigate();
     return (
         <Section id="products" className="bg-slate-950">
             <div className="text-center mb-16">
@@ -57,7 +59,7 @@ export function ProductSplit() {
                                 <Badge variant="default">Marketing Teams</Badge>
                                 <Badge variant="default">SMBs</Badge>
                             </div>
-                            <Button className="w-full justify-between group" onClick={() => window.location.href = 'https://portal.affirmweb.com/cart.php?gid=1'}>
+                            <Button className="w-full justify-between group" onClick={() => navigate('/order/n8n-cloud')}>
                                 Deploy n8n Cloud
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </Button>

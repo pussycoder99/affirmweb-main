@@ -1,7 +1,9 @@
-import { Card } from '../../components/ui/Card';
-import { Server, Users, DollarSign, Activity, HardDrive } from 'lucide-react';
+import { useWhmcsAuth } from '../../lib/WHMCSAuthContext';
+import { Link } from 'react-router-dom';
+import { Server, Users, DollarSign, Activity, HardDrive, AlertCircle, ArrowRight } from 'lucide-react';
 
 export default function Dashboard() {
+    const { isConfigured } = useWhmcsAuth();
     const stats = [
         { label: 'Active Instances', value: '1,248', change: '+12%', icon: Server, color: 'blue' },
         { label: 'Total Customers', value: '856', change: '+4%', icon: Users, color: 'emerald' },
@@ -11,6 +13,25 @@ export default function Dashboard() {
 
     return (
         <div className="space-y-6">
+            {!isConfigured && (
+                <Card className="p-4 bg-amber-950/20 border-amber-900/50 flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                        <div className="p-2 bg-amber-500/10 rounded-lg">
+                            <AlertCircle className="w-6 h-6 text-amber-500" />
+                        </div>
+                        <div>
+                            <h4 className="text-amber-500 font-bold">WHMCS Not Configured</h4>
+                            <p className="text-amber-500/70 text-sm">Your billing system is not connected. Users will not be able to login or place orders.</p>
+                        </div>
+                    </div>
+                    <Link to="/admin/settings">
+                        <Button variant="outline" className="border-amber-900/50 text-amber-500 hover:bg-amber-500/10 gap-2">
+                            Configure Now <ArrowRight className="w-4 h-4" />
+                        </Button>
+                    </Link>
+                </Card>
+            )}
+
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {stats.map((stat) => (

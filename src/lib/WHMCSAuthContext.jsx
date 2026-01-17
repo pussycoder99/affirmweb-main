@@ -8,6 +8,7 @@ export const useWhmcsAuth = () => useContext(WHMCSAuthContext);
 export function WHMCSAuthProvider({ children }) {
     const [client, setClient] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [isConfigured, setIsConfigured] = useState(false);
 
     useEffect(() => {
         // Check local storage for persisted session mock
@@ -15,7 +16,14 @@ export function WHMCSAuthProvider({ children }) {
         if (savedClient) {
             setClient(JSON.parse(savedClient));
         }
-        setLoading(false);
+
+        // Check if WHMCS is configured
+        const checkConfig = async () => {
+            await whmcs.init();
+            setIsConfigured(!!(whmcs.config?.url && whmcs.config?.identifier && whmcs.config?.secret));
+            setLoading(false);
+        };
+        checkConfig();
     }, []);
 
     const login = async (email, password) => {
@@ -54,7 +62,7 @@ export function WHMCSAuthProvider({ children }) {
     };
 
     return (
-        <WHMCSAuthContext.Provider value={{ client, login, signup, logout, loading }}>
+        <WHMCSAuthContext.Provider value={{ client, login, signup, logout, loading, isConfigured }}>
             {children}
         </WHMCSAuthContext.Provider>
     );

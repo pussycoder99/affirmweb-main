@@ -13,6 +13,10 @@ export function AuthProvider({ children }) {
         // Check active session
         supabase.auth.getSession().then(({ data: { session } }) => {
             setUser(session?.user ?? null);
+        }).catch((error) => {
+            console.error("Supabase session check failed:", error);
+            setUser(null);
+        }).finally(() => {
             setLoading(false);
         });
 
